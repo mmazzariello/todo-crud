@@ -24,12 +24,18 @@ const TodoApp = () => {
     temp.unshift(newTodo);
 
     setAllTodos(temp);
+    setTitle("");
   };
 
   const handleUpdate = (id, value) => {
     const temp = [...allTodos];
     const item = temp.find((item) => item.id === id);
     item.title = value;
+    setAllTodos(temp);
+  };
+
+  const handleDelete = (id) => {
+    const temp = allTodos.filter((item) => item.id !== id);
     setAllTodos(temp);
   };
 
@@ -47,7 +53,12 @@ const TodoApp = () => {
 
       <div className="todosContainer">
         {allTodos.map((item) => (
-          <Todo key={item.id} item={item} onUpdate={handleUpdate} />
+          <Todo
+            key={item.id}
+            item={item}
+            onUpdate={handleUpdate}
+            onDelete={handleDelete}
+          />
         ))}
       </div>
     </div>
